@@ -251,7 +251,14 @@ export class PipelineLab {
 				renderer.setRenderTarget( target, i );
 				chain.pipeline.render();
 
-				if ( overlay !== null ) overlay( eye, i );
+				if ( overlay !== null ) {
+
+					// Passes inside the pipeline (PassNode, Bloom, …) restore the previous target with
+					// `setRenderTarget( rt )`, which resets the active layer to 0 — re-bind eye layer `i`.
+					renderer.setRenderTarget( target, i );
+					overlay( eye, i );
+
+				}
 
 			}
 
