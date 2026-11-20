@@ -4,6 +4,26 @@ Three.js r187 の `WebGPURenderer` と WebXR WebGPU Binding (`XRGPUBinding`) を
 `RenderPipeline`（旧 PostProcessing）の各エフェクトを VR の中で調整しながら見られるデモです。
 シーンはネオンゲートが立つ紫の未来都市（ガラスのような反射床、星空、霧、岩）です。
 
+## デモ（GitHub Pages）
+
+**https://webxr-jp.github.io/webxr-webgpu-renderpipeline-demo/**
+
+`main` に push すると GitHub Actions（[.github/workflows/deploy.yml](.github/workflows/deploy.yml)）が
+`npm ci` → `vite build` → Pages への公開までを行います。初回だけリポジトリの
+**Settings → Pages → Source** を **GitHub Actions** に設定してください。
+
+- Pages はサブパス（`/<リポジトリ名>/`）で配信されるため、CI が `configure-pages` の出力から
+  `BASE_PATH` と `SITE_URL` を Vite に渡します（`<user>.github.io` リポジトリなら `/`）。
+- 共有用サムネは [public/ogp.jpg](public/ogp.jpg)（1200×630）。OGP は絶対 URL が必要なので、
+  `index.html` の `__SITE_URL__` をビルド時にサイト URL へ置換しています。
+- Pages は HTTPS なので、ヘッドセットからもそのまま URL を開けます（WebXR のセキュアコンテキスト要件）。
+
+ローカルで本番ビルドを確認する場合:
+
+```bash
+npm run build && npm run preview
+```
+
 ## 起動
 
 ```bash
